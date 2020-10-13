@@ -1,0 +1,105 @@
+{% extends "base2.html" %}
+
+{% block title %}
+<title>Panel</title>
+{% endblock %}
+
+
+{% block sidenav %}
+<ul class="navbar-nav mt-2 pt-2 text-center">
+    <li class="nav-item active mt-2 pt-2">
+        <a class="nav-link "href="http://">Servers</a>
+    </li>
+    <li class="nav-item active mt-2 pt-2">
+        <a  class="nav-link"href="http://">Profile</a>
+    </li>
+    <li class="nav-item active mt-2 pt-2">
+        <a class="nav-link" href="http://">Settings</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block main %}
+
+<div class="mt-2 pt-2 pb-3 mb-3">
+    <button class="btn color bg-custom-light justify-content-right" data-toggle="modal" data-target="#exampleModalCenter">Add Server </button>
+  </div>
+      <table class="table table-hover table-dark bg-custom-dark boder-top  text-center">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Server name</th>
+            <th scope="col">Ip Address</th>
+            <th scope="col">Status</th>
+            <th scope="col">Quick Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in data%}
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{i.Servername}}</td>
+              <td>{{i.ServerIp}}</td>
+              <td style="color:greenyellow;">Active</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-primary mr-2 pr-2" data-toggle="tooltip" data-placement="bottom" title="Start" onclick="window.location.href= 'http://localhost:5000/{{ i.Servername}}/Start'; "><ion-icon name="play-outline"></ion-icon></button>
+                <button type="button" class="btn btn-sm btn-success mr-2 pr-2" data-toggle="tooltip" data-placement="bottom" title="Restart" onclick="window.location.href= 'http://localhost:5000/{{ i.Servername}}/Restart';"><ion-icon name="sync-outline"></ion-icon></button>
+                <button type="button" class="btn btn-sm btn-danger mr-2 pr-2" data-toggle="tooltip" data-placement="bottom" title="Stop" onclick="window.location.href='http://localhost:5000/{{ i.Servername}}/Stop'; "><ion-icon name="stop-circle-outline"></ion-icon></button>
+                
+              </td>
+            </tr>
+          {% endfor%}
+
+        </tbody>
+      </table>
+
+{% endblock %}
+
+
+{% block other %}
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Server:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+  
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">ServerName</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Server Ip Address</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Remote UserName</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Remote Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">ssh key</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                <div class="invalid-feedback">Example invalid custom file feedback</div>
+              </div>          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+
+
